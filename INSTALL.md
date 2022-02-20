@@ -5,7 +5,7 @@
 
 * Système Linux ou assimilé
 * Serveur Web Apache, NGinx ou IIS
-* PHP version 8.0+
+* PHP version 7.4+
 * MySQL, MariaDB, PostgreSQL ou SQLite selon votre cas
 
 
