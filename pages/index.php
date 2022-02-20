@@ -1,5 +1,7 @@
 <?php
     lib\Page::getInstance()->setTitle('Accueil / Login');
+    
+    $contact = \lib\Config::getInstance('general')->get('contact');
 ?><header>
     <h1>
         🍋
@@ -14,7 +16,9 @@
         <p>
             Pour obtenir vos accès,
             contactez un administrateur du système:
-            <a href="mailto:contact@baggio.fr">M. Chassel</a>
+            <a href="<?php echo htmlspecialchars($contact['mail']?? ''); ?>">
+                <?php echo htmlspecialchars($contact['name']?? ''); ?>
+            </a>
         </p>
     </aside>
     <section>
