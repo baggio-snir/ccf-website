@@ -79,12 +79,12 @@ EOT;
     }
     
     public function addStyleFile(string $file): self {
-        $this->styles[] = '<link rel="stylesheet" type="text/css" href="/res/css/'.$file.'.css" />';
+        $this->styles[] = '<link rel="stylesheet" type="text/css" href="res/css/'.$file.'.css" />';
         return $this;
     }
     
     public function addScriptFile(string $file): self {
-        $this->scripts[] = '<script type="text/javascript" src="/res/js/'.$file.'.js">';
+        $this->scripts[] = '<script type="text/javascript" src="res/js/'.$file.'.js">';
         return $this;
     }
     
