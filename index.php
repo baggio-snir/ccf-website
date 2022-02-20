@@ -12,6 +12,7 @@ if(empty($_REQUEST[lib\Page::CTRL_VAR])
 $_page = lib\Page::current();
 
 // include base
+$_page->addStyleFile('base');
 
 if($_page->exists()) {
     $_page->execute(); // run page
