@@ -1,3 +1,6 @@
 {
-    "name": "test"
+    "contact": {
+        "mail": "",
+        "name": ""
+    }
 }
