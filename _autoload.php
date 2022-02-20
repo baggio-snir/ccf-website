@@ -7,7 +7,7 @@ require_once './lib/ClassLoader.php'; // force load ClassLoader
 spl_autoload_register(function($cls) { \lib\ClassLoader::autoload($cls); });
 
 // register special functions, like gettext-style translate
-function _(string $msg, array $args = []) {
+function t(string $msg, array $args = []) {
     $httpLang = empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])? null:Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
     $cfgLang = lib\Config::getInstance('general')->get('lang', DEFAULTLANG);
     $defLang = DEFAULTLANG;
@@ -23,3 +23,5 @@ function _(string $msg, array $args = []) {
     }
     return $l->translate($msg, $args);
 }
+
+if(!function_exists('_')) { function _(string $msg, array $args = []) { return t($msg, $args); } }
