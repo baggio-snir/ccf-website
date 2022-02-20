@@ -56,7 +56,7 @@ echo 'Testing Basic Config : ';
 echo '.';
 try {
     lib\Config::getInstance('general');
-} catch(Exception) {
+} catch(Exception $e) {
     echo 'general config should be here';
 }
 
