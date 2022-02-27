@@ -6,7 +6,7 @@
     <h1>
         🍋
         Citron Telecom
-    </h1>
+    </h1><?php include ROOTDIR.'/fragments/menu.php'; ?>
 </header>
 <main>
     <aside>
