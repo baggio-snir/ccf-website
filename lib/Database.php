@@ -8,17 +8,25 @@ namespace lib;
 class Database {
     use tSingleton;
     
-    protected PDO $connection = null;
+    protected ?\PDO $connection = null;
     protected function __construct() {
         $driver = Config::getInstance('sql')->get('driver');
         $host = Config::getInstance('sql')->get('host');
         $usr = Config::getInstance('sql')->get('user');
         $pwd = Config::getInstance('sql')->get('pwd');
-        $db = Config::getInstance('sql')->get('db');
-        $dsn = $driver.'://'.$host;
+        $dsn = $driver.':host='.$host;
         $this->connection = new \PDO($dsn, $usr, $pwd, [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         ]);
+        $this->useDatabase();
+    }
+    
+    public function useDatabase(?string $db = null): self {
+        if(null === $db) {
+            $db = Config::getInstance('sql')->get('db');
+        }
+        $this->connection->query("use `".$db."`");
+        return $this;
     }
     
     public function getConnection(): \PDO {

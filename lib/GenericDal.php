@@ -22,8 +22,9 @@ abstract class GenericDal {
         if(!empty($id) && !empty($this->primary())) {
             $data[$this->primary()] = $id;
         }
-        $q = "insert ignore into `".$this->table()."` (`".implode("`, `", array_keys($data))."`), (:".implode(", :", array_keys($data)).")";
+        $q = "insert ignore into `".$this->table()."` (`".implode("`, `", array_keys($data))."`) values (:".implode(", :", array_keys($data)).")";
         $id = Database::getInstance()->qi($q, $data);
+        if(!empty($id)) { $this->{$this->primary()} = $id; }
         return $returns;
     }
     
@@ -46,5 +47,29 @@ abstract class GenericDal {
             $returns = true;
         }
         return $returns;
+    }
+    
+    public function load($id): self {
+        $sel = Database::getInstance()->qo(
+                "select * from `".$this->table()."` where `".$this->primary()."`=:id",
+                ['id' => $id,]
+                );
+        if(!empty($sel)) {
+            foreach($sel as $k => $v) {
+                if(property_exists($this, $k)) {
+                    $mn = 'set'.ucfirst($k);
+                    if(method_exists($this, $mn)) {
+                        $this->$mn($v);
+                    } else {
+                        $this->$k = $v;
+                    }
+                }
+            }
+        }
+        return $this;
+    }
+    
+    public function all(): array {
+        return Database::getInstance()->qa("select * from `".$this->table()."`");
     }
 }
