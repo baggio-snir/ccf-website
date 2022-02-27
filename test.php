@@ -12,8 +12,8 @@ echo 'Testing PHP version : ';
 
 echo '.';
 assert(
-        'version_compare(PHP_VERSION, "8.0")',
-        'PHP Version has to be at least 8.0'
+        'version_compare(PHP_VERSION, "7.4")',
+        'PHP Version has to be at least 7.4'
 );
 
 echo ' Done.';
@@ -63,6 +63,32 @@ try {
 echo ' Done.';
 echo PHP_EOL;
 
+
+echo PHP_EOL;
+echo 'Testing Database : ';
+
+try {
+    echo '.';
+    lib\Database::getInstance()->useDatabase(\lib\Config::getInstance('sql')->get('db').'_test');
+    echo '.';
+    lib\Database::getInstance()->q("delete from `vacations`");
+    echo '.';
+    lib\Database::getInstance()->q("delete from `contracts`");
+    echo '.';
+    lib\Database::getInstance()->q("delete from `persons`");
+    echo '.';
+    $person = new dal\Person();
+    $person->setGender('m');
+    $person->setFirstname('John');
+    $person->setLastname('Doe');
+    $person->insert();
+    assert($person->getId(), 'Person should be inserted finely (got "'.$person->getId().'")');
+    echo ' Done.';
+} catch(Exception $e) {
+    echo 'Something went wrong : '.$e->getMessage();
+}
+echo PHP_EOL;
+
 echo PHP_EOL;
 echo 'Testing integrity : ';
 
@@ -74,3 +100,5 @@ assert(
 
 echo ' Done.';
 echo PHP_EOL;
+
+
