@@ -36,6 +36,9 @@ abstract class GenericDal {
         $kid = $this->primary();
         $data = [];
         foreach($this->columns() as $k => $v) {
+            if(is_object($v) && is_a($v, \DateTime::class)) {
+                $v = $v->format(\DateTime::ATOM);
+            }
             $data[$k] = $v;
         }
         
@@ -59,7 +62,7 @@ abstract class GenericDal {
                 );
         if(!empty($sel)) {
             foreach($sel as $k => $v) {
-                if(property_exists($this, $k)) {
+                if(property_exists($this, $k) && !empty($v)) {
                     $mn = 'set'.ucfirst($k);
                     if(method_exists($this, $mn)) {
                         $this->$mn($v);
