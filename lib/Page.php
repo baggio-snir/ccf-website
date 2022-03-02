@@ -27,7 +27,7 @@ class Page {
     }
     
     public static function link(string $target): string {
-        return 'index.php?'.static::CTRL_VAR.'='.$target;
+        return htmlspecialchars('index.php?'.static::CTRL_VAR.'='.$target);
     }
     
     protected bool $lock = false;
