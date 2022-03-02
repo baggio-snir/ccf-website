@@ -33,7 +33,7 @@ class Person extends \lib\GenericDal {
     }
 
     public function getBirthdate(): ?string {
-        return empty($this->birthdate)? null:$this->birthdate->format('Y-m-d H:i:s');
+        return empty($this->birthdate)? null:$this->birthdate->format('Y-m-d');
     }
 
     public function getGender(): ?string {
@@ -54,7 +54,7 @@ class Person extends \lib\GenericDal {
         if(is_object($birthdate) && is_a($birthdate, \DateTime::class)) {
             $this->birthdate = $birthdate;
         } else {
-            $this->birthdate = \DateTime::createFromFormat('Y-m-d H:i:s', $birthdate);
+            $this->birthdate = \DateTime::createFromFormat('Y-m-d', $birthdate);
         }
         return $this;
     }

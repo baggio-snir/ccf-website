@@ -41,7 +41,7 @@ fieldset legend {
     border-color: var(--col-accent);
 }
 
-input {
+input, select {
     background-color: var(--col-main);
     color: var(--col-accent);
     border: 1px solid var(--col-accent);
