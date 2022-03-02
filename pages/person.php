@@ -9,7 +9,6 @@
     }
     
     if(!empty($_REQUEST['saveContract'])) {
-        var_dump($_REQUEST);
         if(empty($person)) { // create
             $pr = new dal\Person();
             $pr->setFirstname($_REQUEST['firstname']);
@@ -31,6 +30,32 @@
                     $ct->setEnd($_REQUEST['end']);
                 }
                 if($ct->insert()) {
+                    $person = lib\Database::getInstance()->qo($qs, ['c' => $ct->getId(),]);
+                }
+            }
+        } else {
+            $ct = new \dal\Contract();
+            $ct->load($person['id']);
+            if(!empty($ct->getId()) && !empty($ct->getPerson())) {
+                $pr = new dal\Person();
+                $pr->load($ct->getPerson());
+                if(!empty($pr->getId())) {
+                    $pr->setFirstname($_REQUEST['firstname']);
+                    $pr->setLastname($_REQUEST['lastname']);
+                    if(!empty($_REQUEST['gender'])) {
+                        $pr->setGender($_REQUEST['gender']);
+                    }
+                    if(!empty($_REQUEST['birthdate'])) {
+                        $pr->setBirthdate($_REQUEST['birthdate']);
+                    }
+                    $pr->update();
+                    $ct->setPosition($_REQUEST['position']);
+                    $ct->setSalary($_REQUEST['salary']);
+                    $ct->setStart($_REQUEST['start']);
+                    if(!empty($_REQUEST['end'])) {
+                        $ct->setEnd($_REQUEST['end']);
+                    }
+                    $ct->update();
                     $person = lib\Database::getInstance()->qo($qs, ['c' => $ct->getId(),]);
                 }
             }
