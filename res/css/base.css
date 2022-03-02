@@ -91,3 +91,11 @@ table thead tr th, table tbody tr:nth-child(even) * {
     background-color: var(--col-accent);
     color: var(--col-main);
 }
+
+.error {
+    border: 2px outset rgba(220, 20, 20, 0.8);
+    color: rgba(220, 20, 20, 0.8);
+    background-color: rgba(20, 20, 20, 0.8);
+    font-weight: bold;
+    padding: 15px;
+}

@@ -43,7 +43,7 @@ class Database {
         return $this->q($q, $qa)->fetchAll(\PDO::FETCH_ASSOC);
     }
     
-    public function qo(string $q, array $qa = []): array {
+    public function qo(string $q, array $qa = []) {
         return $this->q($q, $qa)->fetch(\PDO::FETCH_ASSOC);
     }
     

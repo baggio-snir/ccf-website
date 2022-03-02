@@ -25,6 +25,11 @@ create table `vacations` (
     primary key(`day`, `person`)
 ) engine=InnoDB default character set 'UTF8MB4';
 
+create table `users` (
+    `login` varchar(50) not null primary key,
+    `pwd` text not null
+) engine=InnoDB default character set 'UTF8MB4';
+
 alter table `contracts`
 add constraint `fk_contracts_person`
 foreign key (`person`)

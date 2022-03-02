@@ -26,6 +26,10 @@ class Page {
         return static::$singleton;
     }
     
+    public static function link(string $target): string {
+        return 'index.php?'.static::CTRL_VAR.'='.$target;
+    }
+    
     protected bool $lock = false;
     protected ?string $ctrl = null;
     protected ?string $title = null;

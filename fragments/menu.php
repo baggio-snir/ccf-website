@@ -13,7 +13,7 @@
             <a href="#">Bilan comptable</a>
         </li>
         <li>
-            <a href="#">Administration</a>
+            <a href="<?php echo lib\Page::link('logoff'); ?>">Déconnexion</a>
         </li>
     </menu>
 </nav><?php } ?>
