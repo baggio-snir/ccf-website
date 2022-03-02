@@ -2,9 +2,15 @@
     lib\Page::getInstance()->setTitle('Zone RH / Contracts');
     
     $contracts = lib\Database::getInstance()->qa(
-            'select c.*, p.`firstname` as first, p.`lastname` as last '
-            . ' from `contracts` c left join `persons` p on p.`id`=c.`person` '
+            'select c.*, '
+            . ' if(c.`end` is not null and c.`end`>now(), 0, 1) as active, '
+            . ' (c.`vacations` - count(v.`day`)) as solde, '
+            . ' p.`firstname` as first, p.`lastname` as last '
+            . ' from `contracts` c '
+            . ' left join `persons` p on p.`id`=c.`person` '
+            . ' left join `vacations` v on v.`person`=p.`id` and v.`approved`=1 '
             . ' where p.`id` is not null '
+            . ' group by p.`id` '
             . ' order by p.`id` desc');
 ?><header>
     <h1>
@@ -43,7 +49,7 @@
                     <td><?php echo htmlspecialchars($contract['start']); ?></td>
                     <td><?php echo htmlspecialchars($contract['position']); ?></td>
                     <td><?php echo $contract['active']? 'En poste':'Sortie le '.htmlspecialchars($contract['start']); ?></td>
-                    <td><?php echo intval($contract['vacations']); ?></td>
+                    <td><?php echo intval($contract['solde']); ?></td>
                     <td>
                         <a href="<?php echo \lib\Page::link('person&edit='.intval($contract['id'])); ?>">📝</a>
                         <a href="<?php echo \lib\Page::link('fire&edit='.intval($contract['id'])); ?>">🚪</a>
