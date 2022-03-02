@@ -12,6 +12,9 @@ class Logger {
     protected function __construct(string $type) {
         if(empty($type)) { $type = 'generic'; }
         $this->type = preg_replace('`[^a-z]`', '', $type);
+        if(!file_exists(ROOTDIR.'/logs')) {
+            @mkdir(ROOTDIR.'/logs');
+        }
     }
     
     public function log(string $str): self {
