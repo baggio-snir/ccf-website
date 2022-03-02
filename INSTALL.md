@@ -11,7 +11,7 @@
 
 ## Installation
 
-Décompressez le dossier à la racine de votre VirtualHost
+Copiez le contenu du dossier à la racine de votre VirtualHost
 ou de votre répertoire d'exécution web.
 
 Vérifiez les droits d'installation :
