@@ -57,4 +57,4 @@ Lancez finalement l'application, en accédant depuis votre navigateur,
 ## Langages
 
 Les fichiers de langues sont présents dans le dossier `langs`.
-La langue est automatiquement déduite de la langue préférée du navigeateur.
+La langue est automatiquement déduite de la langue préférée du navigateur.
