@@ -3,5 +3,6 @@
         "mail": "",
         "name": ""
     },
-    "salt": ""
+    "salt": "",
+    "vacations": 0
 }
