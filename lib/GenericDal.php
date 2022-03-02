@@ -17,6 +17,9 @@ abstract class GenericDal {
         $returns = false;
         $data = [];
         foreach($this->columns() as $k => $v) {
+            if(is_object($v) && is_a($v, \DateTime::class)) {
+                $v = $v->format(\DateTime::ATOM);
+            }
             $data[$k] = $v;
         }
         if(!empty($id) && !empty($this->primary())) {
@@ -24,7 +27,7 @@ abstract class GenericDal {
         }
         $q = "insert ignore into `".$this->table()."` (`".implode("`, `", array_keys($data))."`) values (:".implode(", :", array_keys($data)).")";
         $id = Database::getInstance()->qi($q, $data);
-        if(!empty($id)) { $this->{$this->primary()} = $id; }
+        if(!empty($id)) { $this->{$this->primary()} = $id; $returns = true; }
         return $returns;
     }
     
