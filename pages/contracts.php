@@ -3,7 +3,7 @@
     
     $contracts = lib\Database::getInstance()->qa(
             'select c.*, '
-            . ' if(c.`end` is not null and c.`end`>now(), 0, 1) as active, '
+            . ' if(c.`end` is not null and date(c.`end`)<=date(now()), 0, 1) as active, '
             . ' (c.`vacations` - count(v.`day`)) as solde, '
             . ' p.`firstname` as first, p.`lastname` as last '
             . ' from `contracts` c '
@@ -48,7 +48,7 @@
                     <td><?php echo htmlspecialchars($contract['first']); ?></td>
                     <td><?php echo htmlspecialchars($contract['start']); ?></td>
                     <td><?php echo htmlspecialchars($contract['position']); ?></td>
-                    <td><?php echo $contract['active']? 'En poste':'Sortie le '.htmlspecialchars($contract['start']); ?></td>
+                    <td><?php echo $contract['active']? 'En poste':'Sortie le '.htmlspecialchars($contract['end']); ?></td>
                     <td><?php echo intval($contract['solde']); ?></td>
                     <td>
                         <a href="<?php echo \lib\Page::link('person&edit='.intval($contract['id'])); ?>">📝</a>
