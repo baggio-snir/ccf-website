@@ -79,7 +79,7 @@ class ApiHandler {
         $handler = null;
         if($this->hasHandledPath()) {
             $cls = static::getHandler($this->getData('c'));
-            $handler = new $cls;
+            $handler = new $cls($this->data);
         } else {
             $handler = new api\NotFound();
         }

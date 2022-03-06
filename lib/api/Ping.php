@@ -8,6 +8,10 @@ namespace lib\api;
  */
 class Ping extends \lib\GenericApi {
     protected function internal(): array {
-        return ['pong' => microtime(true),];
+        $r = microtime(true);
+        if($this->hasData('slow')) {
+            $r += 1000000;
+        }
+        return ['pong' => $r,];
     }
 }

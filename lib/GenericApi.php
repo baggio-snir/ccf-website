@@ -17,7 +17,7 @@ abstract class GenericApi {
         return array_key_exists($k, $this->data);
     }
     
-    final protected function getData(string $k, $def) {
+    final protected function getData(string $k, $def = null) {
         return $this->hasData($k)? $this->data[$k]:$def;
     }
     
