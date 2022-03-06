@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <lang>en-US</lang>
+    <lang>fr</lang>
     <messages>
         <message>
             <key>rh.area</key>
-            <val>RH Area</val>
+            <val>Zone RH</val>
         </message>
     </messages>
 </root>
