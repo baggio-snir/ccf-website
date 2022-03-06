@@ -44,7 +44,10 @@ en lançant le fichier "test.php" via php.
 ## Import initial
 
 Lancez l'import SQL initial, en important le fichier "install.sql"
-sur la base de données choisie.
+sur la base de données choisie.  
+**Attention** vous devrez créer deux bases de données :  
+* votre base de production, par exemple `citron`
+* votre base de test, nommée comme celle de production, mais suffixée avec "_test", par exemple `citron_test`
 
 
 ## Test d'intégration
