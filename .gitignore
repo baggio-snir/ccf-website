@@ -3,3 +3,4 @@ composer.phar
 /nbproject/private/
 /logs/*
 /config/*.json
+!/config/*.json.dist
