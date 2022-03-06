@@ -11,7 +11,7 @@
 <main>
     <aside>
         <h2>
-            Zone RH
+            <?php echo t('rh.area'); ?>
         </h2>
     </aside>
     <section>
