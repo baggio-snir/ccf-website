@@ -88,7 +88,7 @@ EOT;
     }
     
     public function addScriptFile(string $file): self {
-        $this->scripts[] = '<script type="text/javascript" src="res/js/'.$file.'.js">';
+        $this->scripts[] = '<script type="text/javascript" src="res/js/'.$file.'.js"></script>';
         return $this;
     }
     
@@ -98,7 +98,7 @@ EOT;
     }
     
     public function addScriptUri(string $uri): self {
-        $this->scripts[] = '<script type="text/javascript" src="'.$uri.'">';
+        $this->scripts[] = '<script type="text/javascript" src="'.$uri.'"></script>';
         return $this;
     }
     
