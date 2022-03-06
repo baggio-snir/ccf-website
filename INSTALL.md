@@ -32,7 +32,6 @@ fichier `general.json` en copiant `general.json.dist`.
 Tous les fichiers de configuration doivent être vérifiés:
 * `general` : configuration générale de l'application
 * `sql` : configuration de la base de données
-* `assets` : configuration des assets (images, styles...)
 * `api` : configuration de l'API
 
 
