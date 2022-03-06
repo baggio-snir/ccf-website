@@ -12,16 +12,26 @@ function t(string $msg, array $args = []) {
     $cfgLang = lib\Config::getInstance('general')->get('lang', DEFAULTLANG);
     $defLang = DEFAULTLANG;
     $l = null;
+    $returns = null;
     if(!empty($httpLang)) {
         $l = \lib\Lang::getInstance($httpLang);
+        if(!empty($l) && $l->exists()) {
+            $returns = $l->translate($msg, $args);
+        }
     }
-    if(empty($l) || !$l->exists()) {
+    if(empty($l) || empty($returns) || !$l->exists()) {
         $l = \lib\Lang::getInstance($cfgLang);
+        if(!empty($l) && $l->exists()) {
+            $returns = $l->translate($msg, $args);
+        }
     }
-    if(empty($l) || !$l->exists()) {
+    if(empty($l) || empty($returns) || !$l->exists()) {
         $l = \lib\Lang::getInstance($defLang);
+        if(!empty($l) && $l->exists()) {
+            $returns = $l->translate($msg, $args);
+        }
     }
-    return $l->translate($msg, $args);
+    return empty($returns)? $msg:$returns;
 }
 
 if(!function_exists('_')) { function _(string $msg, array $args = []) { return t($msg, $args); } }
