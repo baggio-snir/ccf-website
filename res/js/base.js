@@ -1,5 +1,5 @@
 
-let pingPong = null;
+let pingPong = true;
 
 function start(e) {
     ping();
@@ -26,7 +26,8 @@ function pingSlow(p) {
     status('pinged', 'Slow : '+p.toString()+'ms', 'warning');
 }
 
-function ping() {
+function ping(slowMode) {
+    if(!slowMode) { slowMode = false; }
     let d = Date.now();
     const h = new Headers();
     h.append('Content-Type', 'text/json');
@@ -35,7 +36,7 @@ function ping() {
         headers: h,
         mode: 'cors'
     };
-    const r = new Request('api.php?c=ping', o);
+    const r = new Request('api.php?c=ping'+(slowMode? '&slow=1':''), o);
     fetch(r, o).then(res => res.json()).then((res) => {
         console.info('Successfully pinged API server');
         if(res.result.pong) {
@@ -46,15 +47,21 @@ function ping() {
                 pingOk(diff);
             }
             pingPong = setTimeout(ping, 5000);
-        } else {
-            pingFailed();
+        } else if(pingPong) {
+            clearTimeout(pingPong);
+            pingPong = null;
+            pingFail();
             alert('There is an error with API server (invalid result)');
             throw 'Error while pinging';
         }
     }).catch(() => {
-        pingFailed();
-        alert('There is an error with API server');
-        throw 'Error while pinging';
+        if(pingPong) {
+            clearTimeout(pingPong);
+            pingPong = null;
+            pingFail();
+            alert('There is an error with API server');
+            throw 'Error while pinging';
+        }
     });
 }
 
