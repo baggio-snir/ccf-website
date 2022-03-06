@@ -12,20 +12,8 @@ echo 'Testing PHP version : ';
 
 echo '.';
 assert(
-        'version_compare(PHP_VERSION, "7.4")',
+        !!version_compare(PHP_VERSION, "7.4"),
         'PHP Version has to be at least 7.4'
-);
-
-echo ' Done.';
-echo PHP_EOL;
-
-echo PHP_EOL;
-echo 'Testing PHP version : ';
-
-echo '.';
-assert(
-        'version_compare(PHP_VERSION, "8.0")',
-        'PHP Version has to be at least 8.0'
 );
 
 echo ' Done.';
@@ -35,14 +23,22 @@ echo PHP_EOL;
 echo 'Testing ClassLoader : ';
 
 echo '.';
+$t = function() {
+    try { ClassLoader::getInstance("lib\\ClassLoader"); return true; }
+    catch(Exception $e) { return false; }
+};
 assert(
-        'try { ClassLoader::getInstance("lib\\ClassLoader"); return true; } catch() { return false; }',
+        $t,
         'ClassLoader should be found'
 );
 
 echo '.';
+$t = function(){
+    try { new UnexistingClass(); return false; }
+    catch(Exception $e) { return true; }
+};
 assert(
-        'try { new UnexistingClass(); return false; } catch() { return true; }',
+        $t,
         'UnexistingClass should not be found'
 );
 
@@ -100,5 +96,4 @@ assert(
 
 echo ' Done.';
 echo PHP_EOL;
-
 
