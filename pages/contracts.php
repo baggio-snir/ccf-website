@@ -1,4 +1,8 @@
 <?php
+    if(!\lib\Session::getInstance()->isLogged()) {
+        header('Location:index.php');
+        exit;
+    }
     lib\Page::getInstance()->setTitle('Zone RH / Contracts');
     
     $contracts = lib\Database::getInstance()->qa(

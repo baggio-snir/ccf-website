@@ -1,4 +1,8 @@
 <?php
+    if(!\lib\Session::getInstance()->isLogged()) {
+        header('Location:index.php');
+        exit;
+    }
     lib\Page::getInstance()->setTitle('Zone RH / Contracts');
     
     $qs = 'select c.*, p.`firstname` as first, p.`lastname` as last, p.`birthdate` as birth, p.`gender` '
