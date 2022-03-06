@@ -92,10 +92,40 @@ table thead tr th, table tbody tr:nth-child(even) * {
     color: var(--col-main);
 }
 
-.error {
-    border: 2px outset rgba(220, 20, 20, 0.8);
-    color: rgba(220, 20, 20, 0.8);
+.error, .warning, .info, .success {
     background-color: rgba(20, 20, 20, 0.8);
     font-weight: bold;
     padding: 15px;
+}
+
+footer#mainFooter {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    overflow: hidden;
+    border-top: 2px outset rgba(20, 20, 20, 0.8);
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+.error {
+    border: 2px outset rgba(220, 20, 20, 0.8);
+    color: rgba(220, 20, 20, 0.8);
+}
+
+.success {
+    border: 2px outset rgba(20, 220, 20, 0.8);
+    color: rgba(20, 220, 20, 0.8);
+}
+
+.warning {
+    border: 2px outset rgba(220, 220, 20, 0.8);
+    color: rgba(220, 220, 20, 0.8);
+}
+
+.info {
+    border: 2px outset rgba(20, 20, 220, 0.8);
+    color: rgba(20, 20, 220, 0.8);
 }
