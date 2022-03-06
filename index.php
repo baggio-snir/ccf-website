@@ -13,6 +13,7 @@ $_page = lib\Page::current();
 
 // include base
 $_page->addStyleFile('base');
+$_page->addScriptFile('base');
 
 if($_page->exists()) {
     $_page->execute(); // run page
@@ -29,7 +30,15 @@ if($_page->exists()) {
         <?php echo implode(PHP_EOL, $_page->getStyles()); ?>
     </head>
     <body>
-        <?php echo $_page->getResult();
-        echo implode(PHP_EOL, $_page->getScripts()); ?>
+        <?php echo $_page->getResult(); ?>
+        <footer id="mainFooter">
+            Copyright
+            🍋
+            Internal IT
+            ||
+            Ping status :
+            <span id="pinged" class="info">Waiting...</span>
+        </footer>
+        <?php echo implode(PHP_EOL, $_page->getScripts()); ?>
     </body>
 </html>
