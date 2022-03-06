@@ -1,4 +1,6 @@
 
+let pingPong = null;
+
 function start(e) {
     ping();
 }
@@ -43,6 +45,7 @@ function ping() {
             } else {
                 pingOk(diff);
             }
+            pingPong = setTimeout(ping, 5000);
         } else {
             pingFailed();
             alert('There is an error with API server (invalid result)');
