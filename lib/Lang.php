@@ -16,8 +16,8 @@ class Lang {
     public function __construct(string $lang) {
         $this->lang = str_replace('_', '-', preg_replace('`[^a-z0-9A-Z_-]`', '', $lang));
         $fn = ROOTDIR.'/langs/'.$this->lang.'.xml';
-        $xml = simplexml_load_file($fn);
-        if(strval($xml->lang) === $lang) {
+        $xml = @simplexml_load_file($fn);
+        if(!empty($xml) && strval($xml->lang) === $lang) {
             foreach($xml->messages->message as $msg) {
                 $k = strval($msg->key);
                 $v = strval($msg->val);
